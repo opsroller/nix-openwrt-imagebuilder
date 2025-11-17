@@ -36,7 +36,7 @@ in rec {
         builtins.filter (variant:
           # A person once made a very large mistake, they split an architecture name by removing the _.
           # ~ Unknown Openwrt Author
-          allProfiles."${target}"."${variant}".profiles ? ${profile}
+          allProfiles."${target}"."${toString variant}".profiles ? ${profile}
         ) (builtins.attrNames allProfiles.${target})
       )
     ) (builtins.attrNames allProfiles);
