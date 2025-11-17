@@ -34,7 +34,9 @@ in rec {
         inherit pkgs release target variant profile;
       }) (
         builtins.filter (variant:
-          allProfiles.${target}.${variant}.profiles ? ${profile}
+          # A person once made a very large mistake, they split an architecture name by removing the _.
+          # ~ Unknown Openwrt Author
+          allProfiles."${target}"."${variant}".profiles ? ${profile}
         ) (builtins.attrNames allProfiles.${target})
       )
     ) (builtins.attrNames allProfiles);
